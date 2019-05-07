@@ -1,25 +1,17 @@
 package tr.com.gokhan.kilic.engcards.activities.selectAvatar;
 
-import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import tr.com.gokhan.kilic.engcards.R;
-import tr.com.gokhan.kilic.engcards.activities.shared.UserDefaults;
+import tr.com.gokhan.kilic.engcards.shared.UserDefaults;
 
 
 public class SelectAvatarAdapter extends RecyclerView.Adapter<SelectAvatarAdapter.MyViewHolder> {
@@ -81,7 +73,7 @@ public class SelectAvatarAdapter extends RecyclerView.Adapter<SelectAvatarAdapte
                 listener.getIdSelectedAvatar(i);
                 myViewHolder.checkImage.setVisibility(View.VISIBLE);
 
-                UserDefaults.getEditor().putInt(USER_AVATAR,i).commit();
+                UserDefaults.getEditor().putInt(USER_AVATAR,avatars.get(i)).commit();
             }
         });
 

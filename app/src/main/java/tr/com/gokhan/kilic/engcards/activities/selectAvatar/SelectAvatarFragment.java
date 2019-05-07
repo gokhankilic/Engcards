@@ -1,18 +1,13 @@
 package tr.com.gokhan.kilic.engcards.activities.selectAvatar;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +19,8 @@ import java.util.List;
 
 import tr.com.gokhan.kilic.engcards.R;
 import tr.com.gokhan.kilic.engcards.activities.common.BaseFragment;
-import tr.com.gokhan.kilic.engcards.activities.shared.UserDefaults;
+import tr.com.gokhan.kilic.engcards.shared.UserDefaults;
+import tr.com.gokhan.kilic.engcards.models.UserModel;
 
 public class SelectAvatarFragment extends BaseFragment implements SelectAvatarAdapter.SelectAvatarListener{
 
@@ -40,6 +36,7 @@ public class SelectAvatarFragment extends BaseFragment implements SelectAvatarAd
     RecyclerView recyclerView;
     ImageButton doneButton;
     EditText userNameEditText;
+    int selectedAvatar;
 
 
 
@@ -85,7 +82,14 @@ public class SelectAvatarFragment extends BaseFragment implements SelectAvatarAd
                int selectedAvatar = UserDefaults.getSharedPreferences().getInt(USER_AVATAR,100);
 
                 if(selectedAvatar != 100 && userName != null && userName != ""){
+                    UserModel user = new UserModel();
+                    user.setUserName(userName);
+                    user.setUserAvatarImage(selectedAvatar);
+                    UserDefaults.setUserAccount(user);
                     getActivity().getSupportFragmentManager().beginTransaction().remove(SelectAvatarFragment.this).commit();
+
+                    getBaseActivity().updateHomeFragments();
+
 
                 }else{
                     getBaseActivity().displayWarningMessage(R.string.title_home);
@@ -127,6 +131,6 @@ public class SelectAvatarFragment extends BaseFragment implements SelectAvatarAd
 
     @Override
     public void getIdSelectedAvatar(int selectedIdAvatar) {
-        Log.i(TAG, "getIdSelectedAvatar: " + selectedIdAvatar);
+       this.selectedAvatar = selectedIdAvatar;
     }
 }

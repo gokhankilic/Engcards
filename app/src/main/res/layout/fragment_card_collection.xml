@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <TextView
+        android:id="@+id/kartKoleksiyonLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:text="Kendi Kart Koleksiyonun"
+        android:textAlignment="center"
+        android:textStyle="bold"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cardCollectionRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kartKoleksiyonLabel">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardCollectionRecyclerView">
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/playCollectionButton"
+            android:tag="0"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Kendi Kartların"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/back"
+            android:textSize="10sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="@color/mainAppColor"
+            android:drawableRight="@drawable/ic_play_arrow_circle" />
+
+        <Button
+            android:id="@+id/playFavoritesButton"
+            android:tag="1"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:text="Favori Kartların"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/back"
+            android:textSize="10sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/mainAppColor"
+            android:drawableRight="@drawable/ic_play_arrow_circle" />
+
+        <Button
+            android:id="@+id/playAllCardsButton"
+            android:tag="2"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Bütün kartlar"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/back"
+            android:textSize="10sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/mainAppColor"
+            android:drawableRight="@drawable/ic_play_arrow_circle" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+

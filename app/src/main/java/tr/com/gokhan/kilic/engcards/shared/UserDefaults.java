@@ -1,17 +1,20 @@
-package tr.com.gokhan.kilic.engcards.activities.shared;
+package tr.com.gokhan.kilic.engcards.shared;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import tr.com.gokhan.kilic.engcards.activities.shared.EngcardsApp;
+
 import com.google.gson.Gson;
 
 import tr.com.gokhan.kilic.engcards.models.UserModel;
+import tr.com.gokhan.kilic.engcards.models.UserProgressModel;
 
 
 public class UserDefaults {
 
     public static String ENGCARDS_PREF = "engcards";
     public static String USER_PREF = "userpref";
+
+    public static String USER_PROGRESS = "userProgress";
 
     public static SharedPreferences getSharedPreferences() {
 
@@ -48,6 +51,27 @@ public class UserDefaults {
             return null;
         }
         return new Gson().fromJson(userAccountStr, UserModel.class);
+    }
+
+
+    public static void setUserProgress(UserProgressModel userProgress) {
+        SharedPreferences.Editor editor = getEditor();
+        if (userProgress == null) {
+            editor.putString(USER_PROGRESS, "");
+        } else {
+            editor.putString(USER_PROGRESS, new Gson().toJson(userProgress));
+        }
+        editor.commit();
+    }
+
+
+    public static UserProgressModel getUserProgress() {
+        SharedPreferences prefs = getSharedPreferences();
+        String userProgressStr = prefs.getString(USER_PROGRESS, "");
+        if (userProgressStr.equals("") || userProgressStr == null) {
+            return null;
+        }
+        return new Gson().fromJson(userProgressStr, UserProgressModel.class);
     }
 
 }

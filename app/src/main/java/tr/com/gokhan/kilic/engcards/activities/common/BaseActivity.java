@@ -1,7 +1,5 @@
 package tr.com.gokhan.kilic.engcards.activities.common;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,18 +18,25 @@ import java.io.IOException;
 import java.util.List;
 
 import tr.com.gokhan.kilic.engcards.R;
-import tr.com.gokhan.kilic.engcards.activities.HomeActivity;
+import tr.com.gokhan.kilic.engcards.database.Database;
+import tr.com.gokhan.kilic.engcards.activities.home.CardCollectionFragment;
+import tr.com.gokhan.kilic.engcards.activities.home.GameChaptersFragment;
+import tr.com.gokhan.kilic.engcards.activities.home.UserInfoFragment;
 
 
 public class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
 
 
-   // public static Database mDBHelper;
+    public static Database mDBHelper;
 
     public SQLiteDatabase mDb;
 
     Toolbar toolbar;
+
+    private UserInfoFragment userInfoFragment;
+    private CardCollectionFragment cardCollectionFragment;
+    private GameChaptersFragment gameChaptersFragment;
 
 
 
@@ -39,7 +44,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_frame);
-       // initDatabase();
+        initDatabase();
 
 
     }
@@ -122,7 +127,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     //to open our database at initilization
-   /* public void initDatabase(){
+    public void initDatabase(){
         mDBHelper = new Database(this);
 
         try {
@@ -136,7 +141,7 @@ public class BaseActivity extends AppCompatActivity {
         } catch (SQLException mSQLException) {
             throw mSQLException;
         }
-    }*/
+    }
 
     // to show simple toast message to the user
     public void displayWarningMessage(int errorMessageResId){
@@ -203,11 +208,59 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void removeAllFragments() {
-        FragmentManager fm = BaseActivity.this.getSupportFragmentManager();
-        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
-            fm.popBackStack();
+        for (Fragment fragment:getSupportFragmentManager().getFragments()) {
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
     }
+
+    public void updateHomeFragments(){
+
+        FragmentTransaction  ftAdd;
+        FragmentTransaction ftRemove;
+
+        if(userInfoFragment != null){
+            ftRemove = getSupportFragmentManager().beginTransaction();
+            ftRemove.remove(userInfoFragment);
+            ftRemove.commitAllowingStateLoss();
+            userInfoFragment = null;
+        }
+
+
+        userInfoFragment = new UserInfoFragment();
+        ftAdd = getSupportFragmentManager().beginTransaction();
+        ftAdd.add(R.id.container, userInfoFragment, UserInfoFragment.TAG);
+        ftAdd.commitAllowingStateLoss();
+
+        if(cardCollectionFragment != null){
+            ftRemove = getSupportFragmentManager().beginTransaction();
+            ftRemove.remove(cardCollectionFragment);
+            ftRemove.commitAllowingStateLoss();
+            cardCollectionFragment = null;
+        }
+
+        cardCollectionFragment = new CardCollectionFragment();
+        ftAdd = getSupportFragmentManager().beginTransaction();
+        ftAdd.add(R.id.container, cardCollectionFragment, CardCollectionFragment.TAG);
+        ftAdd.commitAllowingStateLoss();
+
+        if(gameChaptersFragment != null){
+            ftRemove = getSupportFragmentManager().beginTransaction();
+            ftRemove.remove(gameChaptersFragment);
+            ftRemove.commitAllowingStateLoss();
+            gameChaptersFragment = null;
+        }
+
+        gameChaptersFragment = new GameChaptersFragment();
+        ftAdd = getSupportFragmentManager().beginTransaction();
+        ftAdd.add(R.id.container, gameChaptersFragment, GameChaptersFragment.TAG);
+        ftAdd.commitAllowingStateLoss();
+
+
+
+
+
+    }
+
 
 
 

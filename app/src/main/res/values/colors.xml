@@ -5,4 +5,25 @@
     <color name="colorAccent">#D81B60</color>
     <color name = "mainAppColor">#0095E1</color>
     <color name="bluerColor">#0A000000</color>
+    <color name="chapterItemColor">#29b6f6</color>
+    <color name="finishedChapterItemColor">#1de9b6</color>
+    
+    
+    <!-- CARD COLORS -->
+    <color name="color1">#93d6c3</color>
+    <color name="color2">#a0294c</color>
+    <color name="color3">#ae323b</color>
+    <color name="color4">#a369af</color>
+    <color name="color5">#b0e2ff</color>
+    <color name="color6">#a4d3ee</color>
+    <color name="color7">#d3c99b</color>
+    <color name="color8">#dcc6ad</color>
+    <color name="color9">#a77568</color>
+    <color name="color10">#fd8e2f</color>
+    <color name="color11">#e52325</color>
+    <color name="color12">#ff8da1</color>
+    <color name="color13">#91e374</color>
+
+
+
 </resources>

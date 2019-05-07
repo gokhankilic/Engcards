@@ -1,4 +1,4 @@
-package tr.com.gokhan.kilic.engcards.activities.shared;
+package tr.com.gokhan.kilic.engcards.shared;
 
 import android.app.Application;
 import android.content.Context;
